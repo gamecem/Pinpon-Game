@@ -1,4 +1,6 @@
 using UnityEngine;
+using UniRx;
+using UniRx.Triggers;
 
 public class BallGroundCollisionCounter : MonoBehaviour
 {
@@ -6,32 +8,26 @@ public class BallGroundCollisionCounter : MonoBehaviour
     private const string Ground = nameof(Ground);
     #endregion
 
-    #region Variables
-    private int groundCollisionCount;
+    #region Reactive Variables
+    private ReactiveProperty<int> groundCollisionCount = new ReactiveProperty<int>(0);
+    public IReadOnlyReactiveProperty<int> GroundCollisionCount => groundCollisionCount;
     #endregion
+
     private void Start()
     {
-        groundCollisionCount = 0;
+        groundCollisionCount.Value = 0;
+
+        this.OnCollisionEnterAsObservable()
+            .Where(collision => collision.gameObject.CompareTag(Ground))
+            .Subscribe(_ =>
+            {
+                groundCollisionCount.Value++;
+                Debug.Log("Ground Collisions: " + groundCollisionCount.Value);
+            })
+            .AddTo(this);
     }
-
-    public int GroundCollisionCount { get => groundCollisionCount; set => groundCollisionCount = value; }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag(Ground))
-        {
-            GroundCollisionCount++;
-            Debug.Log("Ground Collisions: " + GroundCollisionCount);
-        }
-    }
-
-    public int GetGroundCollisionCount()
-    {
-        return GroundCollisionCount;
-    }
-
     public void ResetGroundCollisionCount()
     {
-        GroundCollisionCount = 0;
+        groundCollisionCount.Value = 0;
     }
 }
