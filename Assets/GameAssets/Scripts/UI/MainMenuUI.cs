@@ -11,6 +11,7 @@ public class MainMenuUI : MonoBehaviour
 
     [SerializeField] private GameObject LevelsMenuGO;
     [SerializeField] private GameObject MainMenuGO;
+    [SerializeField] private GameObject GameGO;
 
     private void Start()
     {
@@ -22,7 +23,9 @@ public class MainMenuUI : MonoBehaviour
     {
         PlayButton.OnClickAsObservable().Do(_ =>
         {
-            SceneManager.LoadScene(1);
+            LevelsMenuGO.SetActive(false);
+            GameGO.SetActive(true);
+            MainMenuGO.SetActive(false);
         }).Subscribe().AddTo(gameObject);
     }
     private void HandleLevelButton()
@@ -30,10 +33,10 @@ public class MainMenuUI : MonoBehaviour
         LevelButton.OnClickAsObservable().Do(_ =>
         {
             LevelsMenuGO.SetActive(true);
+            GameGO.SetActive(false);
             MainMenuGO.SetActive(false);
         }).Subscribe().AddTo(gameObject);
     }
-
     private void HandleQuitButton()
     {
         QuitButton.OnClickAsObservable().Do(_ =>
