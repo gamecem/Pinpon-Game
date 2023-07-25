@@ -18,16 +18,15 @@ public class LevelPagination : MonoBehaviour
 
     private List<List<Button>> levelButtonPages = new List<List<Button>>();
     private ReactiveProperty<int> currentPage = new ReactiveProperty<int>(0);
-
+    private Button[] playButtons;
     private void Start()
     {
         CreateLevelButtons();
         CreatePreviousPageButton();
         CreateNextPageButton();
-
+        FillTheButtons();
         currentPage.Subscribe(pageIndex => ShowPage(pageIndex)).AddTo(this);
     }
-
     private void CreateLevelButtons()
     {
         int pageCount = Mathf.CeilToInt((float)LevelManager.Instance.GetTotalLevels() / levelsPerPage);
@@ -46,7 +45,8 @@ public class LevelPagination : MonoBehaviour
                 button.GetComponent<RectTransform>().anchoredPosition = new Vector2(initialX + col * spacingX, initialY - row * spacingY);
 
                 button.GetComponentInChildren<TMP_Text>().text = "Level " + (j + 1).ToString();
-                button.onClick.AddListener(() => OnLevelButtonClicked(j + 1));
+                int levelIndex = j + 1; // Capture the current level index
+                button.onClick.AddListener(() => OnLevelButtonClicked(levelIndex));
                 buttons.Add(button);
             }
             levelButtonPages.Add(buttons);
@@ -121,15 +121,36 @@ public class LevelPagination : MonoBehaviour
                 }
             }
         }
-
         paginationPanel.GetChild(0).GetComponent<Button>().interactable = (pageIndex != 0);
-
         paginationPanel.GetChild(1).GetComponent<Button>().interactable = (pageIndex != levelButtonPages.Count - 1);
     }
 
     private void OnLevelButtonClicked(int level)
     {
-        Debug.Log("Level " + level + " button clicked!");
-        // LEVELİ YÜKLE BURDA
+        string sceneName = "Level" + level; // Assuming scene names are like "Level1", "Level2", etc.
+        Debug.Log("Trying to load scene: " + sceneName);
+
+        // Load the scene if it exists
+        if (UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName).IsValid())
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            Debug.LogWarning("Scene " + sceneName + " does not exist!");
+        }
     }
+
+
+    public void FillTheButtons()
+    {
+        int childCount = levelButtonPanel.transform.childCount;
+        playButtons = new Button[childCount];
+        for (int i = 0; i < childCount; i++)
+        {
+            playButtons[i] = levelButtonPanel.transform.GetChild(i).gameObject.GetComponent<Button>();
+        }
+    }
+
+
 }
