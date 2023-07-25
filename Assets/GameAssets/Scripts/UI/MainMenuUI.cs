@@ -6,35 +6,34 @@ using UnityEngine.SceneManagement;
 public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button PlayButton;
-    [SerializeField] private Button LevelButton;
+    [SerializeField] private Button OptionsButton;
     [SerializeField] private Button QuitButton;
 
     [SerializeField] private GameObject LevelsMenuGO;
     [SerializeField] private GameObject MainMenuGO;
-    [SerializeField] private GameObject GameGO;
-
+    [SerializeField] private GameObject OptionsMenuGO;
     private void Start()
     {
         HandlePlayButton();
-        HandleLevelButton();
+        HandleOptionsButton();
         HandleQuitButton();
     }
     private void HandlePlayButton()
     {
         PlayButton.OnClickAsObservable().Do(_ =>
         {
-            LevelsMenuGO.SetActive(false);
-            GameGO.SetActive(true);
+            LevelsMenuGO.SetActive(true);
             MainMenuGO.SetActive(false);
+            OptionsMenuGO.SetActive(false);
         }).Subscribe().AddTo(gameObject);
     }
-    private void HandleLevelButton()
+    private void HandleOptionsButton()
     {
-        LevelButton.OnClickAsObservable().Do(_ =>
+        OptionsButton.OnClickAsObservable().Do(_ =>
         {
-            LevelsMenuGO.SetActive(true);
-            GameGO.SetActive(false);
+            LevelsMenuGO.SetActive(false);
             MainMenuGO.SetActive(false);
+            OptionsMenuGO.SetActive(true);
         }).Subscribe().AddTo(gameObject);
     }
     private void HandleQuitButton()

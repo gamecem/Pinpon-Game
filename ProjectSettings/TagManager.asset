@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Ball
+  - PlayButton
   layers:
   - Default
   - TransparentFX
