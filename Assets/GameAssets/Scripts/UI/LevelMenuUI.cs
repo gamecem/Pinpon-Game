@@ -1,29 +1,26 @@
-
+using GameAssets.Scripts.Game;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-using UniRx;
-using UnityEngine.SceneManagement;
 
-public class LevelMenuUI : MonoBehaviour
+namespace GameAssets.Scripts.UI
 {
-    [SerializeField] private GameObject MainMenuGO;
-    [SerializeField] private GameObject LevelsMenuGO;
-    [SerializeField] private Button ReturnToMainMenuButton;
-    
-    private Button[] playButtons;
-    void Start()
+    public class LevelMenuUI : MonoBehaviour
     {
-        HandleMainMenuButton();
-    }
+        [SerializeField] private Button returnToMainMenuButton;
 
-    private void HandleMainMenuButton()
-    {
-        ReturnToMainMenuButton.OnClickAsObservable().Do(_ =>
+        private void Start()
         {
-            LevelsMenuGO.SetActive(false);
-            MainMenuGO.SetActive(true);
-        }).Subscribe().AddTo(gameObject);
+            HandleMainMenuButton();
+        }
+        private void HandleMainMenuButton()
+        {
+            returnToMainMenuButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                GameManager.Instance.GoToMainMenu();
+            }).AddTo(gameObject);
+        }
+        
+        
     }
-   
-   
 }

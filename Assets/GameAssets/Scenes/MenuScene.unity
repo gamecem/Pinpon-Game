@@ -312,8 +312,60 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1648447202}
+  - {fileID: 479676028}
+  - {fileID: 1468972804}
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &479676026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479676028}
+  - component: {fileID: 479676027}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &479676027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479676026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d1f9ef9ffb0504ab5e0012861b1b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuGO: {fileID: 799103780}
+  optionsMenuGO: {fileID: 2024093951}
+  levelMenuGO: {fileID: 1477549966}
+  lostMenuGO: {fileID: 0}
+  winMenuGO: {fileID: 0}
+  pauseMenuGO: {fileID: 0}
+--- !u!4 &479676028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479676026}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -97.25598, y: -116.9689, z: -39.843018}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 417540455}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &655442493
 GameObject:
@@ -396,7 +448,7 @@ GameObject:
   - component: {fileID: 746973651}
   - component: {fileID: 746973653}
   m_Layer: 5
-  m_Name: PlayButton
+  m_Name: LevelsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -656,12 +708,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9fe031bfe420f46893967b2e4afeb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayButton: {fileID: 746973653}
-  OptionsButton: {fileID: 1217359865}
-  QuitButton: {fileID: 751127621}
-  LevelsMenuGO: {fileID: 1477549966}
-  MainMenuGO: {fileID: 799103780}
-  OptionsMenuGO: {fileID: 2024093951}
+  levelsButton: {fileID: 746973653}
+  optionsButton: {fileID: 1217359865}
+  quitButton: {fileID: 751127621}
 --- !u!4 &799103782
 Transform:
   m_ObjectHideFlags: 0
@@ -1135,7 +1184,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play
+  m_text: Play - Levels
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1441,6 +1490,50 @@ Transform:
   m_Father: {fileID: 799103782}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1468972802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1468972804}
+  - component: {fileID: 1468972803}
+  m_Layer: 0
+  m_Name: GameStateManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1468972803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468972802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64cc86d84b81ca45a0614e5eaa47951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1468972804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468972802}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -97.25598, y: -116.9689, z: -39.843018}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 417540455}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1477549966
 GameObject:
   m_ObjectHideFlags: 0
@@ -1509,9 +1602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e58a6c6d0465a2458766b2492fc69ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainMenuGO: {fileID: 799103780}
-  LevelsMenuGO: {fileID: 1477549966}
-  ReturnToMainMenuButton: {fileID: 1518932752}
+  returnToMainMenuButton: {fileID: 1518932752}
 --- !u!1 &1498503832
 GameObject:
   m_ObjectHideFlags: 0

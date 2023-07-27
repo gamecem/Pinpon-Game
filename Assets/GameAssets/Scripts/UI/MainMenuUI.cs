@@ -1,49 +1,45 @@
-using UnityEngine;
+using GameAssets.Scripts.Game;
 using UniRx;
+using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
-public class MainMenuUI : MonoBehaviour
+namespace GameAssets.Scripts.UI
 {
-    [SerializeField] private Button PlayButton;
-    [SerializeField] private Button OptionsButton;
-    [SerializeField] private Button QuitButton;
+    public class MainMenuUI : MonoBehaviour
+    { 
+        [SerializeField] private Button levelsButton; 
+        [SerializeField] private Button optionsButton;
+        [SerializeField] private Button quitButton;
 
-    [SerializeField] private GameObject LevelsMenuGO;
-    [SerializeField] private GameObject MainMenuGO;
-    [SerializeField] private GameObject OptionsMenuGO;
-    private void Start()
-    {
-        HandlePlayButton();
-        HandleOptionsButton();
-        HandleQuitButton();
-    }
-    private void HandlePlayButton()
-    {
-        PlayButton.OnClickAsObservable().Do(_ =>
+        private void Start()
         {
-            LevelsMenuGO.SetActive(true);
-            MainMenuGO.SetActive(false);
-            OptionsMenuGO.SetActive(false);
-        }).Subscribe().AddTo(gameObject);
-    }
-    private void HandleOptionsButton()
-    {
-        OptionsButton.OnClickAsObservable().Do(_ =>
+            HandleLevelsButton();
+            HandleOptionsButton();
+            HandleQuitButton();
+        }
+
+        private void HandleLevelsButton()
         {
-            LevelsMenuGO.SetActive(false);
-            MainMenuGO.SetActive(false);
-            OptionsMenuGO.SetActive(true);
-        }).Subscribe().AddTo(gameObject);
-    }
-    private void HandleQuitButton()
-    {
-        QuitButton.OnClickAsObservable().Do(_ =>
+            levelsButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                GameManager.Instance.GoToLevelMenu();
+            }).AddTo(gameObject);
+        }
+
+        private void HandleOptionsButton()
         {
-            Application.Quit();
-        }).Subscribe().AddTo(gameObject);
+            optionsButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                GameManager.Instance.GoToOptionsMenu();
+            }).AddTo(gameObject);
+        }
+
+        private void HandleQuitButton()
+        {
+            quitButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                Application.Quit();
+            }).AddTo(gameObject);
+        }
     }
-
-
-
 }

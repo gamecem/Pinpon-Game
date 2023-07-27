@@ -1,24 +1,27 @@
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+namespace GameAssets.Scripts.Level
 {
-    public static LevelManager Instance;
-
-    public int totalLevels = 30; 
-
-    private void Awake()
+    public class LevelManager : MonoBehaviour
     {
-        if (Instance == null)
+        public static LevelManager Instance;
+
+        public int totalLevels = 30; 
+
+        private void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else if (Instance != this)
+            {
+                Destroy(gameObject);
+            }
         }
-        else if (Instance != this)
+        public int GetTotalLevels()
         {
-            Destroy(gameObject);
+            return totalLevels;
         }
-    }
-    public int GetTotalLevels()
-    {
-        return totalLevels;
     }
 }
