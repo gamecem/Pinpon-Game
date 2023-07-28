@@ -284,9 +284,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1667253467429610482, guid: ad3897e7d156d744c9f974d10a7fc13d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1783138641100860181, guid: ad3897e7d156d744c9f974d10a7fc13d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2471751862371351006, guid: ad3897e7d156d744c9f974d10a7fc13d, type: 3}
       propertyPath: m_Name
       value: OptionsMenuGO
+      objectReference: {fileID: 0}
+    - target: {fileID: 6486579543631764108, guid: ad3897e7d156d744c9f974d10a7fc13d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972392100545997006, guid: ad3897e7d156d744c9f974d10a7fc13d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7831707828806430140, guid: ad3897e7d156d744c9f974d10a7fc13d, type: 3}
       propertyPath: m_RootOrder
