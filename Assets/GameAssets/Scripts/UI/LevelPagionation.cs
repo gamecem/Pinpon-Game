@@ -4,6 +4,7 @@ using GameAssets.Scripts.Level;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace GameAssets.Scripts.UI
@@ -134,16 +135,7 @@ namespace GameAssets.Scripts.UI
         {
             string sceneName = "Level" + level; // Assuming scene names are like "Level1", "Level2", etc.
             Debug.Log("Trying to load scene: " + sceneName);
-
-            // Load the scene if it exists
-            if (UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName).IsValid())
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
-            }
-            else
-            {
-                Debug.LogWarning("Scene " + sceneName + " does not exist!");
-            }
+            SceneManager.LoadScene(sceneName);
         }
         
         private void FillTheButtons()
@@ -155,7 +147,5 @@ namespace GameAssets.Scripts.UI
                 playButtons[i] = levelButtonPanel.transform.GetChild(i).gameObject.GetComponent<Button>();
             }
         }
-
-
     }
 }
