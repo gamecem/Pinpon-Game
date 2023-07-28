@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using GameAssets.Scripts.Level;
@@ -135,7 +136,16 @@ namespace GameAssets.Scripts.UI
         {
             string sceneName = "Level" + level; // Assuming scene names are like "Level1", "Level2", etc.
             Debug.Log("Trying to load scene: " + sceneName);
-            SceneManager.LoadScene(sceneName);
+
+            int sceneBuildIndex = SceneUtility.GetBuildIndexByScenePath(sceneName);
+            if (sceneBuildIndex != -1)
+            {
+                SceneManager.LoadScene(sceneName);
+            }
+            else
+            {
+                Debug.LogError("Scene not found in build settings: " + sceneName);
+            }
         }
         
         private void FillTheButtons()
