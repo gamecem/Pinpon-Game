@@ -7,6 +7,8 @@ namespace GameAssets.Scripts.Level
         public static LevelManager Instance;
 
         public int totalLevels = 30; 
+        
+        
 
         private void Awake()
         {

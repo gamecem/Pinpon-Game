@@ -1,18 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
+using GameAssets.Scripts.Game;
+using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class LoseGameUI : MonoBehaviour
+namespace GameAssets.Scripts.UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class LoseGameUI : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private Button retryButton;
+        [SerializeField] private Button mainMenuButton;
 
-    // Update is called once per frame
-    void Update()
-    {
+        private void Start()
+        {
+            HandleRetryButton();
+            HandleMainMenuButton();
+        }
+
+        private void HandleRetryButton()
+        {
+            retryButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                var currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+                SceneManager.LoadScene(currentSceneIndex);
+            }).AddTo(gameObject);
+        }
         
+        private void HandleMainMenuButton()
+        {
+            mainMenuButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                GameManager.Instance.GoToMainMenu();
+                SceneManager.LoadScene(0);
+            }).AddTo(gameObject);
+        }
     }
 }
+

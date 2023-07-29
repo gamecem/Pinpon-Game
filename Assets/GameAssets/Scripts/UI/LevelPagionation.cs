@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using GameAssets.Scripts.Game;
 using GameAssets.Scripts.Level;
 using TMPro;
 using UniRx;
@@ -140,6 +140,7 @@ namespace GameAssets.Scripts.UI
             int sceneBuildIndex = SceneUtility.GetBuildIndexByScenePath(sceneName);
             if (sceneBuildIndex != -1)
             {
+                //GameManager.Instance.StartGame();
                 SceneManager.LoadScene(sceneName);
             }
             else

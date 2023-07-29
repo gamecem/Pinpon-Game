@@ -1,18 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
+using GameAssets.Scripts.Game;
+using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class PauseMenuUI : MonoBehaviour
+namespace GameAssets.Scripts.UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class PauseMenuUI : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private Button resumeButton;
+        [SerializeField] private Button mainMenuButton;
 
-    // Update is called once per frame
-    void Update()
-    {
+        private void Start()
+        {
+            HandleRetryButton();
+            HandleMainMenuButton();
+        }
+
+        private void HandleRetryButton()
+        {
+            resumeButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                GameManager.Instance.StartGame();
+            }).AddTo(gameObject);
+        }
         
+        private void HandleMainMenuButton()
+        {
+            mainMenuButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                //GameManager.Instance.GoToMainMenu();
+                SceneManager.LoadScene(0);
+            }).AddTo(gameObject);
+        }
     }
 }

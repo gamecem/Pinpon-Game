@@ -150,6 +150,10 @@ PrefabInstance:
       propertyPath: totalLevels
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 4105116720545008588, guid: e2a0a4b57804a714d8979d335c675a6e, type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
     - target: {fileID: 5958946789526509736, guid: e2a0a4b57804a714d8979d335c675a6e, type: 3}
       propertyPath: mainMenuGO
       value: 
@@ -227,6 +231,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelsMenuGO
       objectReference: {fileID: 0}
+    - target: {fileID: 1742987813486347370, guid: 4fab4324ea3d5eb43924bef5e8332efa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3374912416848260724, guid: 4fab4324ea3d5eb43924bef5e8332efa, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -284,25 +292,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1667253467429610482, guid: ad3897e7d156d744c9f974d10a7fc13d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1783138641100860181, guid: ad3897e7d156d744c9f974d10a7fc13d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2471751862371351006, guid: ad3897e7d156d744c9f974d10a7fc13d, type: 3}
       propertyPath: m_Name
       value: OptionsMenuGO
-      objectReference: {fileID: 0}
-    - target: {fileID: 6486579543631764108, guid: ad3897e7d156d744c9f974d10a7fc13d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6972392100545997006, guid: ad3897e7d156d744c9f974d10a7fc13d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7831707828806430140, guid: ad3897e7d156d744c9f974d10a7fc13d, type: 3}
       propertyPath: m_RootOrder
