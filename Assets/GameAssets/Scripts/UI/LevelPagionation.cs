@@ -35,6 +35,7 @@ namespace GameAssets.Scripts.UI
         private void CreateLevelButtons()
         {
             int pageCount = Mathf.CeilToInt((float)LevelManager.Instance.GetTotalLevels() / levelsPerPage);
+            int levelPageCounter = 1;
             for (int i = 0; i < pageCount; i++)
             {
                 List<Button> buttons = new List<Button>();
@@ -51,8 +52,14 @@ namespace GameAssets.Scripts.UI
 
                     button.GetComponentInChildren<TMP_Text>().text = "Level " + (j + 1).ToString();
                     int levelIndex = j + 1; // Capture the current level index
-                    button.onClick.AddListener(() => OnLevelButtonClicked(levelIndex));
+                    button.OnClickAsObservable().Subscribe(_ =>
+                    {
+                        var levelActive = GameObject.Find("Level" + levelPageCounter);
+                        OnLevelButtonClicked(levelActive);
+                        levelPageCounter++;
+                    });
                     buttons.Add(button);
+                    
                 }
                 levelButtonPages.Add(buttons);
             }
@@ -132,23 +139,13 @@ namespace GameAssets.Scripts.UI
             paginationPanel.GetChild(1).GetComponent<Button>().interactable = (pageIndex != levelButtonPages.Count - 1);
         }
 
-        private void OnLevelButtonClicked(int level)
+        private void OnLevelButtonClicked(GameObject level)
         {
-            string sceneName = "Level" + level; // Assuming scene names are like "Level1", "Level2", etc.
-            Debug.Log("Trying to load scene: " + sceneName);
-
-            int sceneBuildIndex = SceneUtility.GetBuildIndexByScenePath(sceneName);
-            if (sceneBuildIndex != -1)
-            {
-                //GameManager.Instance.StartGame();
-                SceneManager.LoadScene(sceneName);
-            }
-            else
-            {
-                Debug.LogError("Scene not found in build settings: " + sceneName);
-            }
+            GameManager.Instance.StartGame();
+            Debug.Log("LevelActivated");
+            Debug.Log(level);
+            level.SetActive(true);
         }
-        
         private void FillTheButtons()
         {
             int childCount = levelButtonPanel.transform.childCount;

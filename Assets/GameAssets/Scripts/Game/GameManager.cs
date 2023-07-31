@@ -13,8 +13,7 @@ namespace GameAssets.Scripts.Game
         [SerializeField] private GameObject pauseMenuGO;
         [SerializeField] private GameObject InGameMenu;
         #endregion
-        
-        
+
         #region Singleton
         private static GameManager instance;
         public static GameManager Instance
@@ -34,6 +33,7 @@ namespace GameAssets.Scripts.Game
             }
         }
         #endregion
+
         private void OnGameStateChange(GameState newState)
         {
             switch (newState)
@@ -62,73 +62,62 @@ namespace GameAssets.Scripts.Game
             }
         }
 
-        #region InGameStates
-        
+        private void ShowMenu(GameObject menuGO)
+        {
+            mainMenuGO.SetActive(false);
+            optionsMenuGO.SetActive(false);
+            levelMenuGO.SetActive(false);
+            lostMenuGO.SetActive(false);
+            winMenuGO.SetActive(false);
+            pauseMenuGO.SetActive(false);
+            InGameMenu.SetActive(false);
+
+            if (menuGO != null)
+            {
+                menuGO.SetActive(true);
+            }
+        }
+
         public void StartGame()
         {
-            // Logic to start the game, e.g., load a scene or set initial game state
             GameStateManager.Instance.SetState(GameState.InGame);
-            InGameMenu.SetActive(true);
-            lostMenuGO.SetActive(false);
-            winMenuGO.SetActive(false);
-            pauseMenuGO.SetActive(false);
+            ShowMenu(InGameMenu);
         }
+
         public void GameOver()
         {
-            // Logic for game over, e.g., display a game over screen
             GameStateManager.Instance.SetState(GameState.Lost);
-            lostMenuGO.SetActive(true);
-            winMenuGO.SetActive(false);
-            pauseMenuGO.SetActive(false);
-            InGameMenu.SetActive(false);
+            ShowMenu(lostMenuGO);
         }
+
         public void WinGame()
         {
-            // Logic for winning the game, e.g., display a victory screen
             GameStateManager.Instance.SetState(GameState.Win);
-            winMenuGO.SetActive(true);
-            lostMenuGO.SetActive(false);
-            pauseMenuGO.SetActive(false);
-            InGameMenu.SetActive(false);
-
+            ShowMenu(winMenuGO);
         }
+
         public void GoToPauseMenu()
         {
-            // Logic to pause the game and show the pause menu
             GameStateManager.Instance.SetState(GameState.Pause);
-            pauseMenuGO.SetActive(true);
-            winMenuGO.SetActive(false);
-            lostMenuGO.SetActive(false);
-            InGameMenu.SetActive(false);
+            ShowMenu(pauseMenuGO);
         }
-        
-        #endregion
 
-        #region MenuStates
         public void GoToMainMenu()
         {
-            // Logic to go to the main menu, e.g., load the main menu scene
             GameStateManager.Instance.SetState(GameState.MainMenu);
-            mainMenuGO.SetActive(true);
-            levelMenuGO.SetActive(false);
-            optionsMenuGO.SetActive(false);
+            ShowMenu(mainMenuGO);
         }
+
         public void GoToLevelMenu()
         {
-            // Logic to go to the level menu, e.g., load the level menu scene
             GameStateManager.Instance.SetState(GameState.LevelMenu);
-            levelMenuGO.SetActive(true);
-            mainMenuGO.SetActive(false);
-            optionsMenuGO.SetActive(false);
+            ShowMenu(levelMenuGO);
         }
+
         public void GoToOptionsMenu()
         {
-            // Logic to go to the options menu, e.g., load the options menu scene
             GameStateManager.Instance.SetState(GameState.OptionsMenu);
-            optionsMenuGO.SetActive(true);
-            mainMenuGO.SetActive(false);
-            levelMenuGO.SetActive(false);
+            ShowMenu(optionsMenuGO);
         }
-        #endregion
     }
 }

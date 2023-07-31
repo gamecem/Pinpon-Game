@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5695851785139747085}
   - component: {fileID: 4989065447095407731}
   - component: {fileID: 1713828546775604246}
-  - component: {fileID: 7420437181663380479}
+  - component: {fileID: 467229071444569565}
   m_Layer: 0
   m_Name: LevelButton
   m_TagString: PlayButton
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7420437181663380479
+--- !u!114 &467229071444569565
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class FixScale : MonoBehaviour
+namespace GameAssets.Scripts
 {
-    [SerializeField] private RectTransform rectTransform;
-    private void Start()
+    public class FixScale: MonoBehaviour
     {
-        rectTransform.transform.localScale = new Vector3(1, 1, 0);
+        [SerializeField] private RectTransform rectTransform;
+        private void Start()
+        {
+            rectTransform.transform.localScale = new Vector3(1, 1, 0);
+        }
     }
 }
