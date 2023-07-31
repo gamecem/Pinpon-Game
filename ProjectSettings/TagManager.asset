@@ -8,6 +8,7 @@ TagManager:
   - Ball
   - PlayButton
   - GoalBox
+  - WinBox
   layers:
   - Default
   - TransparentFX
