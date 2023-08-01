@@ -15,6 +15,7 @@ namespace GameAssets.Scripts.Ball
         #region Consts
         private const string Ground = nameof(Ground);
         private const string WinBox = nameof(WinBox);
+        private const string GameArea = nameof(GameArea);
         #endregion
 
         #region Reactive Variables
@@ -29,6 +30,7 @@ namespace GameAssets.Scripts.Ball
             groundCollisionCount.Value = 0;
             CountGroundCollision();
             HandleWinBoxCollision();
+            HandleExitGameArea();
         }
 
         public void ResetGroundCollisionCount()
@@ -44,8 +46,12 @@ namespace GameAssets.Scripts.Ball
                 {
                     groundCollisionCount.Value++;
                     Debug.Log("Ground Collisions: " + groundCollisionCount.Value);
-
+    
                     onGroundCollision?.Invoke(groundCollisionCount.Value);
+                    if (groundCollisionCount.Value > LevelHandler.Instance.MaxCollideCount)
+                    {
+                        GameManager.Instance.GameOver();
+                    }
                 })
                 .AddTo(this);
         }
@@ -65,6 +71,16 @@ namespace GameAssets.Scripts.Ball
                     {
                         GameManager.Instance.GameOver();
                     }
+                }).AddTo(gameObject);
+        }
+
+        private void HandleExitGameArea()
+        {
+            this.OnTriggerExitAsObservable()
+                .Where(other => other.gameObject.CompareTag(GameArea))
+                .Subscribe(_ =>
+                {
+                    GameManager.Instance.GameOver();
                 }).AddTo(gameObject);
         }
     }
