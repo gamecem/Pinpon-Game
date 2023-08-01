@@ -4,6 +4,9 @@ namespace GameAssets.Scripts.Game
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private GameObject ballPrefab;
+        [SerializeField] private Transform gameBall;
+        private Vector3 ballLocation;
         #region GameViews
         [SerializeField] private GameObject mainMenuGO;
         [SerializeField] private GameObject optionsMenuGO;
@@ -16,6 +19,10 @@ namespace GameAssets.Scripts.Game
 
         #region Singleton
         private static GameManager instance;
+        private void Start()
+        {
+            ballLocation = gameBall.position;
+        }
         public static GameManager Instance
         {
             get
@@ -33,7 +40,6 @@ namespace GameAssets.Scripts.Game
             }
         }
         #endregion
-
         private void OnGameStateChange(GameState newState)
         {
             switch (newState)
@@ -61,7 +67,6 @@ namespace GameAssets.Scripts.Game
                     break;
             }
         }
-
         private void ShowMenu(GameObject menuGO)
         {
             mainMenuGO.SetActive(false);
@@ -77,43 +82,37 @@ namespace GameAssets.Scripts.Game
                 menuGO.SetActive(true);
             }
         }
-
         public void StartGame()
         {
             GameStateManager.Instance.SetState(GameState.InGame);
             ShowMenu(InGameMenu);
+            Instantiate(ballPrefab,ballLocation,Quaternion.identity);
         }
-
         public void GameOver()
         {
             GameStateManager.Instance.SetState(GameState.Lost);
             ShowMenu(lostMenuGO);
         }
-
         public void WinGame()
         {
             GameStateManager.Instance.SetState(GameState.Win);
             ShowMenu(winMenuGO);
         }
-
         public void GoToPauseMenu()
         {
             GameStateManager.Instance.SetState(GameState.Pause);
             ShowMenu(pauseMenuGO);
         }
-
         public void GoToMainMenu()
         {
             GameStateManager.Instance.SetState(GameState.MainMenu);
             ShowMenu(mainMenuGO);
         }
-
         public void GoToLevelMenu()
         {
             GameStateManager.Instance.SetState(GameState.LevelMenu);
             ShowMenu(levelMenuGO);
         }
-
         public void GoToOptionsMenu()
         {
             GameStateManager.Instance.SetState(GameState.OptionsMenu);

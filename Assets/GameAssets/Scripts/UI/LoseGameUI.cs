@@ -21,8 +21,7 @@ namespace GameAssets.Scripts.UI
         {
             retryButton.OnClickAsObservable().Subscribe(_ =>
             {
-                var currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-                SceneManager.LoadScene(currentSceneIndex);
+                GameManager.Instance.StartGame();
             }).AddTo(gameObject);
         }
         
