@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using GameAssets.Scripts.Game;
 using GameAssets.Scripts.Level;
+using GameAssets.Scripts.Utils;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -54,7 +55,7 @@ namespace GameAssets.Scripts.UI
                     int levelIndex = j + 1; // Capture the current level index
                     button.OnClickAsObservable().Subscribe(_ =>
                     {
-                        var levelActive = GameObject.Find("Level" + levelPageCounter);
+                        var levelActive = "Level" + levelPageCounter;
                         OnLevelButtonClicked(levelActive);
                         levelPageCounter++;
                     });
@@ -139,12 +140,12 @@ namespace GameAssets.Scripts.UI
             paginationPanel.GetChild(1).GetComponent<Button>().interactable = (pageIndex != levelButtonPages.Count - 1);
         }
 
-        private void OnLevelButtonClicked(GameObject level)
+        private void OnLevelButtonClicked(string level)
         {
             GameManager.Instance.StartGame();
             Debug.Log("LevelActivated");
             Debug.Log(level);
-            level.SetActive(true);
+            AdditiveSceneManager.Instance.LoadAdditiveScene(level);
         }
         private void FillTheButtons()
         {

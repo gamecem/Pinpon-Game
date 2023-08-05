@@ -4,9 +4,6 @@ namespace GameAssets.Scripts.Game
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private GameObject ballPrefab;
-        [SerializeField] private Transform gameBall;
-        private Vector3 ballLocation;
         #region GameViews
         [SerializeField] private GameObject mainMenuGO;
         [SerializeField] private GameObject optionsMenuGO;
@@ -19,10 +16,6 @@ namespace GameAssets.Scripts.Game
 
         #region Singleton
         private static GameManager instance;
-        private void Start()
-        {
-            ballLocation = gameBall.position;
-        }
         public static GameManager Instance
         {
             get
@@ -86,7 +79,7 @@ namespace GameAssets.Scripts.Game
         {
             GameStateManager.Instance.SetState(GameState.InGame);
             ShowMenu(InGameMenu);
-            Instantiate(ballPrefab,ballLocation,Quaternion.identity);
+            //Instantiate(ballPrefab,ballLocation,Quaternion.identity);
         }
         public void GameOver()
         {

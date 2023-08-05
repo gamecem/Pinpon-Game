@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameAssets.Scripts
+namespace GameAssets.Scripts.Utils
 {
     public class FixScale: MonoBehaviour
     {
