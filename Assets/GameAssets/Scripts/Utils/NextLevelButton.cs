@@ -1,4 +1,6 @@
 using System.Text.RegularExpressions;
+using GameAssets.Scripts.Level;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,11 +11,12 @@ namespace GameAssets.Scripts.Utils
     public class NextLevelButton : MonoBehaviour
     {
         private const string Ground = nameof(Ground);
-        
         [SerializeField] private Button nextLevelButton;
+        [SerializeField] private TMP_Text errorText;  
         private GameObject additiveSceneObject;
         private void Start()
         {
+            errorText.text = "";
             nextLevelButton.OnClickAsObservable().Subscribe(_ =>
             {
                 OnNextLevelButtonClicked();
@@ -30,9 +33,15 @@ namespace GameAssets.Scripts.Utils
             Debug.Log(levelNo);
             int numericLevelNo = int.Parse(levelNo);
             int otherLevel = numericLevelNo + 1;
-            
-            AdditiveSceneManager.Instance.UnloadAdditiveScene(currentSceneName);
-            AdditiveSceneManager.Instance.LoadAdditiveScene(levelBase + "" + otherLevel);
+            if (LevelManager.Instance.GetTotalLevels() == numericLevelNo)
+            {
+                errorText.text = "There are no new levels";
+            }
+            else
+            { 
+                AdditiveSceneManager.Instance.UnloadAdditiveScene(currentSceneName);
+                AdditiveSceneManager.Instance.LoadAdditiveScene(levelBase + "" + otherLevel);
+            }
         }
         private static string GetNumericPart(string input)
         {

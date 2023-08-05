@@ -36,7 +36,6 @@ namespace GameAssets.Scripts.UI
         private void CreateLevelButtons()
         {
             int pageCount = Mathf.CeilToInt((float)LevelManager.Instance.GetTotalLevels() / levelsPerPage);
-            int levelPageCounter = 1;
             for (int i = 0; i < pageCount; i++)
             {
                 List<Button> buttons = new List<Button>();
@@ -55,9 +54,8 @@ namespace GameAssets.Scripts.UI
                     int levelIndex = j + 1; // Capture the current level index
                     button.OnClickAsObservable().Subscribe(_ =>
                     {
-                        var levelActive = "Level" + levelPageCounter;
+                        var levelActive = "Level" + levelIndex;
                         OnLevelButtonClicked(levelActive);
-                        levelPageCounter++;
                     });
                     buttons.Add(button);
                     
