@@ -1,18 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class RetryLevelButton : MonoBehaviour
+namespace GameAssets.Scripts.Utils
 {
-    // Start is called before the first frame update
-    void Start()
+    public class RetryLevelButton : MonoBehaviour
     {
-        
-    }
+        private const string Ground = nameof(Ground);
+        [SerializeField] private Button retryLevelButton;
+         
+        private GameObject additiveSceneObject;
+        private void Start()
+        {
+            HandleRetryButtonClick();
+        }
+        private void OnRetryLevelButtonClicked()
+        {
+            additiveSceneObject = GameObject.FindGameObjectWithTag(Ground);// O sahneye ait bir tane adam bulki o sahneyi silsin Çok salak bir çözüm buna bakmak lazım
+            Scene additiveScene = SceneManager.GetSceneByPath(additiveSceneObject.scene.path);
+            string currentSceneName = additiveScene.name;
+            AdditiveSceneManager.Instance.UnloadAdditiveScene(currentSceneName);
+            AdditiveSceneManager.Instance.LoadAdditiveScene(currentSceneName);
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void HandleRetryButtonClick()
+        {
+            retryLevelButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                OnRetryLevelButtonClicked();
+            }).AddTo(gameObject);
+        }
     }
 }

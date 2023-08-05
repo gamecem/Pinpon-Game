@@ -17,10 +17,8 @@ namespace GameAssets.Scripts.Utils
         private void Start()
         {
             errorText.text = "";
-            nextLevelButton.OnClickAsObservable().Subscribe(_ =>
-            {
-                OnNextLevelButtonClicked();
-            }).AddTo(gameObject);
+            
+            HandleNextLevelButton();
         }
         private void OnNextLevelButtonClicked()
         {
@@ -43,6 +41,15 @@ namespace GameAssets.Scripts.Utils
                 AdditiveSceneManager.Instance.LoadAdditiveScene(levelBase + "" + otherLevel);
             }
         }
+
+        private void HandleNextLevelButton()
+        {
+            nextLevelButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                OnNextLevelButtonClicked();
+            }).AddTo(gameObject);
+        }
+        
         private static string GetNumericPart(string input)
         {
             return Regex.Match(input, @"\d+").Value;
@@ -51,5 +58,6 @@ namespace GameAssets.Scripts.Utils
         {
             return Regex.Replace(input, @"\d+", "");
         }
+        
     }
 }
